@@ -1,0 +1,361 @@
+<!-- AppAbout.vue -->
+
+<template>
+    <div class="container" :class="{ active: isSignUp }">
+      <div class="form-container sign-up" v-if="isSignUp">
+        <form @submit.prevent="register">
+          <h1>회원가입</h1>
+          <!-- <div class="social-icons">
+            <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+          </div> -->
+          <span>이름과 로그인시 사용할 이메일과 비밀번호를 입력해주세요</span>
+          <input type="text" placeholder="Name" v-model="regName">
+          <input type="id" placeholder="Email" v-model="regEmail">
+          <input type="text" placeholder="인증번호" v-model="regVal">
+          <sapn>이메일 인증을 진행해주세요
+            <button type="submit">확인</button>
+          </sapn>
+          
+          <input type="password" placeholder="Password" v-model="regPassword">
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+      <div class="form-container sign-in" v-else>
+        <form @submit.prevent="login()">
+          <h1>로그인</h1>
+          <div class="social-icons">
+            <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+          </div>
+          <span>이메일과 비밀번호를 입력해주세요</span>
+          <input type="id" placeholder="Email" v-model.trim="loginEmail" ref="email">
+          <input type="password" placeholder="Password" v-model.trim="loginPassword" ref="password">
+          <a href="#">비밀번호를 잊으셨나요?</a>
+          <button>로그인</button>
+        </form>
+      </div>
+      <div class="toggle-container">
+        <div class="toggle">
+          <div class="toggle-panel toggle-left">
+            <h1>환영합니다!</h1>
+            <p>회원이 아니신가요? 지금 가입하세요!</p>
+            <button class="hidden" @click="toggleSignUp">Sign In</button>
+          </div>
+          <div class="toggle-panel toggle-right">
+            <h1>반갑습니다!</h1>
+            <p>저희 사이트를 이용하시려면 로그인을 진행해주세요!</p>
+            <button class="hidden" @click="toggleSignUp">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="back-button">
+      <a href="/" class="navbar-item">돌아가기</a>
+    </button>
+    <button @click="postTest">테스트</button>
+  </template>
+  
+  <script>
+  import axios from "axios";
+  
+  export default {
+    data() {
+      return {
+        isSignUp: false,
+        Name: "",
+        Email: "",
+        Password: "",
+        regVal:"",
+        loginEmail: "",
+        loginPassword: "",
+      };
+    },
+    methods: {
+      register() {
+        // Handle registration logic
+        axios
+        .post("https://likelion-running.store/api/login", {
+          email : this.regEmail,
+          name : this.regName,
+          valemail : this.regVal,
+          password : this.regPassword,
+        })
+
+
+
+
+
+        
+
+
+
+        console.log("Registering...");
+      },
+      login() {
+        axios
+          .post("https://f8d18dba-7677-44e0-bf9d-0f0641e326f8.mock.pstmn.io/login", {
+            memberId: this.loginEmail,
+            password: this.loginPassword,
+          })
+          .then((res) => {
+            console.log(res);
+            ('로그인 되었습니다.')
+            //this.$router.replace("/")
+            //this.$router.push("/")
+            window.location.href='/'
+          })
+          .catch((err) => {
+            console.log(err);
+            alert('회원이 아니거나, 이메일 혹은 패스워드가 틀립니다.')
+          });
+          
+      },
+      toggleSignUp() {
+        this.isSignUp = !this.isSignUp;
+      },
+      postTest() {
+        axios
+          .post("https://likelion-running.store/api/login", {
+            memberId: "test123",
+            password: "12345678",
+          })
+          .then((res) => {
+            console.log(res);})
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+    },
+    mounted() {
+      this.$refs.email.focus();
+    },
+  };
+  </script>
+      
+<style>
+
+
+/* *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+} */
+
+body{
+    background-color: #c9d6ff;
+    background: linear-gradient(to right, #e2e2e2, #05123f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.container{
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+}
+
+.container p{
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin: 20px 0;
+}
+
+.container span{
+    font-size: 12px;
+}
+
+.container a{
+    color: #333;
+    font-size: 13px;
+    text-decoration: none;
+    margin: 15px 0 10px;
+}
+
+.container button{
+    background-color: #e3abef;
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.container button.hidden{
+    background-color: transparent;
+    border-color: #fff;
+}
+
+.container form{
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+}
+
+.container input{
+    background-color: #eee;
+    border: none;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+
+.form-container{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in{
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.container.active .sign-in{
+    transform: translateX(100%);
+}
+
+.sign-up{
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.active .sign-up{
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: move 0.6s;
+}
+
+@keyframes move{
+    0%, 49.99%{
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100%{
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.social-icons{
+    margin: 20px 0;
+}
+
+.social-icons a{
+    border: 1px solid #ccc;
+    border-radius: 20%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 3px;
+    width: 40px;
+    height: 40px;
+}
+
+.toggle-container{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    border-radius: 150px 0 0 100px;
+    z-index: 1000;
+}
+
+.container.active .toggle-container{
+    transform: translateX(-100%);
+    border-radius: 0 150px 100px 0;
+}
+
+.toggle{
+    background-color: #512da8;
+    height: 100%;
+    background: linear-gradient(to right, #909ce0, #8c7fac);
+    color: #fff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.container.active .toggle{
+    transform: translateX(50%);
+}
+
+.toggle-panel{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 30px;
+    text-align: center;
+    top: 0;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.toggle-left{
+    transform: translateX(-200%);
+}
+
+.container.active .toggle-left{
+    transform: translateX(0);
+}
+
+.toggle-right{
+    right: 0;
+    transform: translateX(0);
+}
+
+.container.active .toggle-right{
+    transform: translateX(200%);
+}
+.back-button {
+  margin-top: 20px;
+  background-color: #edbcfa !important;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 999;
+}
+
+.back-button:hover {
+  background-color: #bbb;
+}
+</style>
+      

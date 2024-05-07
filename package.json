@@ -1,0 +1,65 @@
+{
+  "name": "career",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@google-cloud/aiplatform": "^3.17.0",
+    "@google-cloud/vertexai": "^1.1.0",
+    "@google/generative-ai": "^0.7.0",
+    "axios": "^1.6.8",
+    "bootstrap": "^5.3.3",
+    "core-js": "^3.8.3",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "google-auth": "^0.0.1",
+    "node-polyfill-webpack-plugin": "^3.0.0",
+    "openai": "^4.32.0",
+    "sass": "^1.75.0",
+    "sass-loader": "^14.2.0",
+    "setup": "^0.0.3",
+    "stream": "^0.0.2",
+    "vue": "^3.2.13",
+    "vue-router": "^4.0.0-0",
+    "vuex": "^4.0.0-0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true,
+      "vue/setup-compiler-macros": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "description": "## Project setup ``` npm install ```",
+  "main": "babel.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
