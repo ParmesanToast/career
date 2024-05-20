@@ -41,7 +41,14 @@ const routes = [
     path:'/detail/:company/:field',
     name:'AppDetail',
     component: () => import('../views/AppDetail.vue')
-  }
+  },
+  {
+    path:'/create',
+    name:'create',
+    component: () =>import('../views/AppCreate.vue')
+  },
+  
+
 ]
 
 const router = createRouter({

@@ -92,7 +92,8 @@
       },
       login() {
         axios
-          .post("https://f8d18dba-7677-44e0-bf9d-0f0641e326f8.mock.pstmn.io/login", {
+          //.post("http://13.124.111.106/api/login", {
+          .post("http://localhost:8080/api/login", {
             memberId: this.loginEmail,
             password: this.loginPassword,
           })
@@ -114,9 +115,9 @@
       },
       postTest() {
         axios
-          .post("https://likelion-running.store/api/login", {
-            memberId: "test123",
-            password: "12345678",
+          .post("http://localhost:8080/api/login", {
+            memberId: "abc123",
+            password: "abc123123",
           })
           .then((res) => {
             console.log(res);})

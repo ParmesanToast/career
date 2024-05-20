@@ -50,8 +50,8 @@
   <div id="navbarBasicExample" :class="{ 'navbar-menu': true, 'is-active': isNavbarActive }">
     <div class="navbar-start">
       
-      <router-link to="/community" class="navbar-item">community</router-link>
-      <router-link to="/interview" class="navbar-item">게시판</router-link>
+      <router-link to="/community" class="navbar-item">게시판</router-link>
+      <router-link to="/interview" class="navbar-item">추천회사보기</router-link>
       
 
       <div class="navbar-item has-dropdown is-hoverable">
@@ -71,8 +71,8 @@
 
     <div class="navbar-end">
       <div class="navbar-item">
-        <input type="text" class="searchtext">&nbsp;
-        <button class="serchbtn">검색</button>  
+        <input type="text" class="searchtext" placeholder="검색어를 입력해주세요." v-model="keyword" @keyup.enter="searchresult()">&nbsp;
+        <button class="serchbtn" @click="searchresult()">검색</button>  
         &nbsp;&nbsp;&nbsp;
         
         <div class="buttons">
@@ -93,22 +93,45 @@
     name: 'AppHeader',
     data() {
         return {
-        isNavbarActive: false
+        isNavbarActive: false,
+        keyword:''
         };
     },
     methods: {
         toggleNavbar() {
         this.isNavbarActive = !this.isNavbarActive;
-        }
+        },
+
+        searchresult(keyword){
+                if (keyword !== ''){ //검색어를 입력한 경우
+              this.$router.push({
+                name: "SearchPage",
+                params: {
+                  keyword: this.keyword,
+                  isResultShow: true,
+                },
+              });
+              this.keyword = ''
+              console.log('"',keyword,'"' + ' 검색')
+            } else {
+              alert('검색어를 입력해주세요!')  //검색어를 입력하지 않은 경우
+            }
+
+        },
     },
     el: 'app',
-    src:"https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js",
     };
     
   </script>
   
   <style scoped>
-  /* 필요한 스타일링을 여기에 추가합니다. */
-  
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: solid rgb(46, 105, 234);
+  border-radius: 15px;
+  cursor: pointer;
+}
   </style>
   
