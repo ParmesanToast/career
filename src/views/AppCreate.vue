@@ -3,8 +3,8 @@
       <Header />
       <div class="container">
         <h2>Create a New Post</h2>
-        <input v-model="newTitle" class="title-input" placeholder="Title" />
-        <textarea v-model="newPost" class="post-input" placeholder="Write something..."></textarea>
+        <input v-model="newTitle" class="title-input" placeholder="제목을 입력해주세요." />
+        <textarea v-model="newPost" class="post-input" placeholder="내용을 입력해주세요"></textarea>
         <button class="button" @click="addPost">Post</button>
       </div>
       <Footer />

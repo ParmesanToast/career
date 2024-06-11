@@ -1,28 +1,8 @@
 <template>
     <Header></Header>
-    
-<div class="container">
-  <div class="field">
-    <label class="label" style="font-size: 25px;">관심 분야를 선택하세요.</label>
-    <div class="control">
-      <label class="radio">
-        <input type="radio" v-model="selectedField" name="field" value="프론트엔드">
-        <span class="radio-text">프론트엔드</span>
-      </label>
-      <label class="radio">
-        <input type="radio" v-model="selectedField" name="field" value="백엔드">
-        <span class="radio-text">백엔드</span>
-      </label>
-      <label class="radio">
-        <input type="radio" v-model="selectedField" name="field" value="데이터 분석가">
-        <span class="radio-text">데이터 분석가</span>
-      </label>
-    </div>
-  </div>
-</div>
-
+ 
   <div class="container">
-    <ui class="companyList">
+    <ul class="companyList">
       <li>
         <img :src="'https://www.sk.co.kr/lib/images/desktop/logo.png'" alt="skLogo" class="logo" style="position: relative; top: 15px; ">
         <div class="company-info">
@@ -207,8 +187,9 @@
           <button @click="goToDetail('원티드랩')">WANTEDLAB면접 예상질문과 답변보기</button>
         </div>
       </li>
-    </ui>
+    </ul>
   </div>
+  
 
 
         <Footer></Footer>
@@ -234,7 +215,7 @@
         return{
             data:"null",
             mUsers:[],
-            selectedField: null
+            
         };
       },
 
@@ -245,19 +226,17 @@
       methods:{
 
         goToDetail(companyName) {
-          if (!this.selectedField) {
-            alert('관심 분야를 선택해주세요.');
-          } else {
+          
             this.$router.push({
               name: 'AppDetail',
               params: {
                 company: companyName,
-                field: this.selectedField
+                
               }
             });
           }
         }
-        },
+        
 
 
 

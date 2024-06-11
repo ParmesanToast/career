@@ -3,36 +3,39 @@
 <template>
     <div class="container" :class="{ active: isSignUp }">
       <div class="form-container sign-up" v-if="isSignUp">
+        <!-- 회원가입 -->
         <form @submit.prevent="register">
           <h1>회원가입</h1>
           <!-- <div class="social-icons">
             <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
           </div> -->
           <span>이름과 로그인시 사용할 이메일과 비밀번호를 입력해주세요</span>
+          <input type="text" placeholder="ID" v-model="regmemid">
           <input type="text" placeholder="Name" v-model="regName">
           <input type="id" placeholder="Email" v-model="regEmail">
-          <input type="text" placeholder="인증번호" v-model="regVal">
-          <sapn>이메일 인증을 진행해주세요
+          <!-- <sapn>이메일 인증을 진행해주세요
             <button type="submit">확인</button>
-          </sapn>
+          </sapn> -->
           
           <input type="password" placeholder="Password" v-model="regPassword">
           <button type="submit">Sign Up</button>
         </form>
       </div>
+      <!-- 로그인 -->
       <div class="form-container sign-in" v-else>
         <form @submit.prevent="login()">
           <h1>로그인</h1>
           <div class="social-icons">
             <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
           </div>
-          <span>이메일과 비밀번호를 입력해주세요</span>
-          <input type="id" placeholder="Email" v-model.trim="loginEmail" ref="email">
+          <span>ID와 비밀번호를 입력해주세요</span>
+          <input type="id" placeholder="ID" v-model.trim="loginEmail" ref="id">
           <input type="password" placeholder="Password" v-model.trim="loginPassword" ref="password">
           <a href="#">비밀번호를 잊으셨나요?</a>
           <button>로그인</button>
         </form>
       </div>
+<!-- 토글컨테이너 -->
       <div class="toggle-container">
         <div class="toggle">
           <div class="toggle-panel toggle-left">
@@ -51,68 +54,102 @@
     <button class="back-button">
       <a href="/" class="navbar-item">돌아가기</a>
     </button>
-    <button @click="postTest">테스트</button>
+    <!-- <button @click="postTest">테스트</button> -->
   </template>
   
   <script>
   import axios from "axios";
-  
+ // import { mapActions } from 'vuex';
+  import apiClient from '@/utils/api'
+
   export default {
+    name: 'UserLogin',
+
     data() {
       return {
         isSignUp: false,
         Name: "",
         Email: "",
         Password: "",
-        regVal:"",
+        memberId:"",
         loginEmail: "",
         loginPassword: "",
       };
     },
+    
+
     methods: {
+
+         // ...mapActions(['login']),
+        async login () {
+          try {
+            const response = await apiClient.post('/login', {
+              email: this.loginEmail,
+              password: this.loginPassword
+            })
+            const token = response.data.token
+            localStorage.setItem('token', token)
+            //this.$router.push('/') // Redirect to home or any other page
+            window.location.href='/'
+            console.log(response.data.token)
+          
+        } catch (error) {
+            console.error('Login failed:', error)
+            alert('아아디 혹은 패스워드가 틀립니다.')
+            // Handle error appropriately
+          }
+        },
+
       register() {
         // Handle registration logic
+        if (this.regPassword.length < 8) {
+          alert('비밀번호는 8글자 이상이어야 합니다.');
+          return; // 회원가입 요청 전송을 중단
+        }
+
         axios
-        .post("https://likelion-running.store/api/login", {
+        .post("http://3.39.228.111/api/sign-up", {
           email : this.regEmail,
           name : this.regName,
-          valemail : this.regVal,
+          memberId : this.regmemid,
           password : this.regPassword,
         })
-
-
-
-
-
-        
-
-
-
-        console.log("Registering...");
+        .then((res)=>{ 
+          console.log(res)
+          alert('회원가입이 완료되었습니다.')
+          window.location.href='/'
+        })
+        .catch((err) => {
+          console.log(err)
+          alert('이미 존재하는 ID입니다.')
+        })
       },
-      login() {
-        axios
-          //.post("http://13.124.111.106/api/login", {
-          .post("http://localhost:8080/api/login", {
-            memberId: this.loginEmail,
-            password: this.loginPassword,
-          })
-          .then((res) => {
-            console.log(res);
-            ('로그인 되었습니다.')
-            //this.$router.replace("/")
-            //this.$router.push("/")
-            window.location.href='/'
-          })
-          .catch((err) => {
-            console.log(err);
-            alert('회원이 아니거나, 이메일 혹은 패스워드가 틀립니다.')
-          });
+
+      //login() {
+        // axios
+        //   //.post("http://13.124.111.106/api/login", {
+        //   .post("http://localhost:8080/api/login", {
+        //     memberId: this.loginEmail,
+        //     password: this.loginPassword,
+        //   })
+        //   .then((res) => {
+        //     console.log(res);
+        //     ('로그인 되었습니다.')
+        //     //this.$router.replace("/")
+        //     //this.$router.push("/")
+        //     window.location.href='/'
+        //   })
+        //   .catch((err) => {
+        //     console.log(err);
+        //     alert('회원이 아니거나, 이메일 혹은 패스워드가 틀립니다.')
+        //   });
           
-      },
+     // },
+
       toggleSignUp() {
         this.isSignUp = !this.isSignUp;
       },
+
       postTest() {
         axios
           .post("http://localhost:8080/api/login", {
@@ -126,14 +163,17 @@
           });
       },
     },
+
     mounted() {
-      this.$refs.email.focus();
+      this.$refs.id.focus();
     },
   };
   </script>
-      
-<style>
 
+
+
+
+<style>
 
 /* *{
     margin: 0;

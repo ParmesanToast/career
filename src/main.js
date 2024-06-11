@@ -2,6 +2,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+import store from '../store';
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -9,4 +10,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // app.use(router); // Vue 인스턴스에 Vue Router를 등록합니다.
 // app.mount('#app');
 
-createApp(App).use(router).mount('#app')
+createApp(App)
+.use(router)
+.use(store)
+.mount('#app')
+
+
