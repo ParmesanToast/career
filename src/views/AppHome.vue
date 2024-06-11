@@ -6,14 +6,14 @@
     <!-- Main Content -->
     <div class="container is-fluid">
       <!-- Section 1: Introduction -->
-      <div class="section" ref="section1" style="background-color: #f0f0f0;">
+      <div class="section" ref="section1" :style="{ backgroundImage: `url(${require('@/assets/1.png')})`, backgroundSize: 'cover', backgroundPosition: 'center' }"></div>
         <div class="content has-text-centered" >
-          <h1>안녕하세요, 미래 개발자 여러분! 코딩네스트에서 함께 꿈을 향한 여정을 떠나보세요.</h1>
+          <!-- <h1>안녕하세요, 미래 개발자 여러분! 코딩네스트에서 함께 꿈을 향한 여정을 떠나보세요.</h1>
           <p>코딩네스트는 첨단 AI 기술을 기반으로 면접 준비를 돕는 혁신적인 플랫폼입니다.
           저희는 수많은 면접 데이터를 분석하여 개발된 AI 알고리즘을 통해 맞춤형 면접 연습 경험을 제공합니다. 실제 면접 상황과 유사한 환경에서 반복적인 연습을 통해 자신감과 실력을 향상시킬 수 있도록 효율적인 면접 준비를 지원합니다.
-          </p>
+          </p> -->
         </div>
-      </div>
+    
 
       <!-- Section 2: Features -->
       <div class="section" ref="section2" style="background-color: #e9e9e9;">
@@ -48,18 +48,18 @@
       </div>
 
       <!-- Section 3: Call to Action -->
-      <div class="section" ref="section3">
+       <div class="section" ref="section3" :style="{ backgroundImage: `url(${require('@/assets/3.png')})`, backgroundSize: 'cover', backgroundPosition: 'center' }"></div>
         <div class="content has-text-centered">
           <h2></h2>
           <p></p>
-          <router-link to="/interview" class="button">추천회사보기</router-link>
+          <router-link to="/mbti" class="button" style="top: -120px;">성격유형 검사하기</router-link>
         </div>
       </div>
     </div>
 
     <!-- Footer Component -->
     <Footer />
-  </div>
+
 </template>
 
 <script>

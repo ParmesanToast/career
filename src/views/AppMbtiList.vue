@@ -11,7 +11,7 @@
         <img src="../assets/logo/s-oil.png" alt="samsungLogo" class="logo" style="position: relative; top: 20px;">
         <div class="company-info">
           <p><strong>사명 :&nbsp;</strong> S-Oil</p>
-          <p><a href="https://www.s-oil.com/en/images/company/ci_img_01.png"><strong>채용 홈페이지 바로가기&nbsp;</strong> </a> </p>
+          <p><a href="https://s-oil.recruiter.co.kr/career/home"><strong>채용 홈페이지 바로가기&nbsp;</strong> </a> </p>
         </div>
         <div class="button-container">
         <button @click="goToDetail('에쓰오일')">S-Oil면접 예상질문과 답변보기</button></div>

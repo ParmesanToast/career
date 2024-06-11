@@ -13,7 +13,7 @@
         <br><br>
         </div>
 
-        <button @click="submitAnswers()">제출</button>
+        <button @click="submitAnswers()">답변 피드백 보기</button>
         <br><br>
 
 

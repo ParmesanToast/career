@@ -47,8 +47,8 @@
             
             <div class="buttons">
               <!-- 아래 버튼을 v-if 또는 v-show 디렉티브를 사용하여 로그인 상태에 따라 표시/숨김 처리 -->
-              <router-link v-if="!isAuthenticated" to="/login" class="button is-primary">
-                <strong>Sign up</strong>
+              <router-link v-if="isToken==false" to="/login" class="button is-primary">
+                <strong>LogIn/SignUp</strong>
               </router-link>
               <button v-else @click="logout" class="button is-primary">
                 <strong>Logout</strong>
@@ -69,7 +69,8 @@ export default {
   data() {
     return {
       isNavbarActive: false,
-      keyword: ''
+      keyword: '',
+      isToken: false,
     };
   },
   computed: {
@@ -98,10 +99,20 @@ export default {
     },
     logout() {
       // 로그아웃 액션을 디스패치
+      localStorage.removeItem("token")
       window.location.href='/'
     },
   },
-};
+
+  mounted() {
+  if (localStorage.getItem('token')) {
+    this.isToken = true;
+  } else {
+    this.isToken = false;
+  }
+}
+
+}
 </script>
   
 <style scoped>

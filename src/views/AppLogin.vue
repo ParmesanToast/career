@@ -26,10 +26,10 @@
         <form @submit.prevent="login()">
           <h1>로그인</h1>
           <div class="social-icons">
-            <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+            <!-- <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a> -->
           </div>
           <span>ID와 비밀번호를 입력해주세요</span>
-          <input type="id" placeholder="ID" v-model.trim="loginEmail" ref="id">
+          <input type="id" placeholder="ID" v-model.trim="loginid" ref="id">
           <input type="password" placeholder="Password" v-model.trim="loginPassword" ref="password">
           <a href="#">비밀번호를 잊으셨나요?</a>
           <button>로그인</button>
@@ -72,7 +72,7 @@
         Email: "",
         Password: "",
         memberId:"",
-        loginEmail: "",
+        loginid: "",
         loginPassword: "",
       };
     },
@@ -84,7 +84,7 @@
         async login () {
           try {
             const response = await apiClient.post('/login', {
-              email: this.loginEmail,
+              memberId: this.loginid,
               password: this.loginPassword
             })
             const token = response.data.token
