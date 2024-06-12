@@ -108,7 +108,7 @@
         }
 
         axios
-        .post("http://3.39.228.111/api/sign-up", {
+        .post("https://smucapstone.asia/api/sign-up", {
           email : this.regEmail,
           name : this.regName,
           memberId : this.regmemid,

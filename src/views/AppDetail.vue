@@ -17,6 +17,8 @@
         <br><br>
 
 
+
+      
         <div v-html="formattedAns"></div>
       </div>
 
@@ -51,7 +53,8 @@
 
         allQuestion : [],
         Qans: [],
-        answers: []
+        answers: [],
+      
       }
     },
   
@@ -74,7 +77,7 @@
     
     mounted() {
         axios
-        .get("http://3.39.228.111/api/interview/info")
+        .get("https://smucapstone.asia/api/interview/info")
         .then(res=>{
             this.allQuestion = res.data
             console.log(res.data)
@@ -93,6 +96,7 @@
       },
 
       submitAnswers(){
+        
       const dataToSend = this.Qans.map((question, index) => ({
         question: question.question,
         answer: this.answers[index]
@@ -107,13 +111,13 @@
           {
             role: "user",
             //content: this.company + this.field + "면접 예상질문과 모범답안 알려줘 (HTML형식으로 작성해줘)"
-             content:  combinedata + "이건 면접 예상질문과 사용자 답안이야. 사용자 응답을 수정하지말고, 사용자 응답에 대해서 피드백을 해줘(HTML형식으로 응답해줘)"
+             content:  combinedata + "이건 면접 예상질문과 사용자 답안이야. 사용자 응답을 수정하지말고, 사용자 답안에 대해서 피드백을 해줘(HTML형식으로 응답해줘 질문은 h2태그를 사용해!!)"
           }
         ]
       };
 
       axios
-        .post("http://3.39.228.111/api/v1/chatGpt/prompt", payload, {
+        .post("https://smucapstone.asia/api/v1/chatGpt/prompt", payload, {
           
         })
         .then(res => {
@@ -126,8 +130,7 @@
           console.error("Error", error);
           this.error = "Failed to fetch data from the API. Please try again later.";
         });
-
-
+     
     },
 
       
